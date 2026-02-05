@@ -1,11 +1,24 @@
+# Personal Portfolio Website
 
-  # Personal Portfolio Website
+Portfolio personal desarrollado con React + Vite. Incluye secciones de presentación, formación, proyectos y contacto.
 
-  This is a code bundle for Personal Portfolio Website. The original project is available at https://www.figma.com/design/PjeGX5Hd6KBfMrq3kXqCan/Personal-Portfolio-Website.
+## Stack
 
-  ## Running the code
+- React
+- Vite
+- TypeScript
+- Tailwind CSS
+- Motion
 
-  Run `npm i` to install the dependencies.
+## Scripts
 
-  Run `npm run dev` to start the development server.
-  
+- `npm i` instala dependencias
+- `npm run dev` inicia el servidor local
+- `npm run build` genera producción en `dist`
+- `npm run preview` previsualiza el build
+
+## Deploy en Vercel
+
+- Framework: Vite
+- Build Command: `npm run build`
+- Output Directory: `dist`
