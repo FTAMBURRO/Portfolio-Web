@@ -55,14 +55,14 @@ export function Contact() {
               viewport={{ once: true }}
               transition={{ delay: 0.3 }}
               whileHover={{ scale: 1.05, y: -5 }}
-              className="flex items-center gap-4 p-6 bg-white/20 backdrop-blur-sm rounded-2xl hover:bg-white/30 transition-all group border border-white/30"
+              className="flex flex-col sm:flex-row items-start sm:items-center gap-4 p-6 bg-white/20 backdrop-blur-sm rounded-2xl hover:bg-white/30 transition-all group border border-white/30 min-w-0"
             >
               <div className="p-4 bg-gradient-to-br from-orange-500 to-red-500 rounded-xl group-hover:rotate-12 transition-transform">
                 <Mail size={24} className="text-white" />
               </div>
               <div>
                 <div className="text-sm text-cyan-200">Email</div>
-                <div className="text-white font-semibold">tamburrofacundo@gmail.com</div>
+                <div className="text-white font-semibold break-words">tamburrofacundo@gmail.com</div>
               </div>
             </motion.a>
 
@@ -75,14 +75,14 @@ export function Contact() {
               viewport={{ once: true }}
               transition={{ delay: 0.4 }}
               whileHover={{ scale: 1.05, y: -5 }}
-              className="flex items-center gap-4 p-6 bg-white/20 backdrop-blur-sm rounded-2xl hover:bg-white/30 transition-all group border border-white/30"
+              className="flex flex-col sm:flex-row items-start sm:items-center gap-4 p-6 bg-white/20 backdrop-blur-sm rounded-2xl hover:bg-white/30 transition-all group border border-white/30 min-w-0"
             >
               <div className="p-4 bg-gradient-to-br from-gray-700 to-gray-900 rounded-xl group-hover:rotate-12 transition-transform">
                 <Github size={24} className="text-white" />
               </div>
               <div>
                 <div className="text-sm text-cyan-200">GitHub</div>
-                <div className="text-white font-semibold">github.com/FTAMBURRO</div>
+                <div className="text-white font-semibold break-words">github.com/FTAMBURRO</div>
               </div>
             </motion.a>
 
@@ -95,14 +95,14 @@ export function Contact() {
               viewport={{ once: true }}
               transition={{ delay: 0.5 }}
               whileHover={{ scale: 1.05, y: -5 }}
-              className="flex items-center gap-4 p-6 bg-white/20 backdrop-blur-sm rounded-2xl hover:bg-white/30 transition-all group border border-white/30"
+              className="flex flex-col sm:flex-row items-start sm:items-center gap-4 p-6 bg-white/20 backdrop-blur-sm rounded-2xl hover:bg-white/30 transition-all group border border-white/30 min-w-0"
             >
               <div className="p-4 bg-gradient-to-br from-blue-500 to-blue-700 rounded-xl group-hover:rotate-12 transition-transform">
                 <Linkedin size={24} className="text-white" />
               </div>
               <div>
                 <div className="text-sm text-cyan-200">LinkedIn</div>
-                <div className="text-white font-semibold">linkedin.com/in/facundo-tamburro</div>
+                <div className="text-white font-semibold break-words">linkedin.com/in/facundo-tamburro</div>
               </div>
             </motion.a>
 
@@ -112,7 +112,7 @@ export function Contact() {
               viewport={{ once: true }}
               transition={{ delay: 0.6 }}
               whileHover={{ scale: 1.05, y: -5 }}
-              className="flex items-center gap-4 p-6 bg-white/20 backdrop-blur-sm rounded-2xl border border-white/30"
+              className="flex flex-col sm:flex-row items-start sm:items-center gap-4 p-6 bg-white/20 backdrop-blur-sm rounded-2xl border border-white/30 min-w-0"
             >
               <div className="p-4 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-xl">
                 <MapPin size={24} className="text-white" />

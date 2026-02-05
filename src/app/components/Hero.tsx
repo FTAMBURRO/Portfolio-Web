@@ -12,7 +12,7 @@ export function Hero() {
   return (
     <section
       id="home"
-      className="min-h-screen flex items-center justify-center bg-gradient-to-br from-emerald-50 via-cyan-50 to-orange-50 pt-20 relative overflow-hidden"
+      className="min-h-[100svh] md:min-h-screen flex items-center justify-center bg-gradient-to-br from-emerald-50 via-cyan-50 to-orange-50 pt-24 pb-20 md:pt-20 md:pb-0 relative overflow-hidden"
     >
       {/* Animated background elements */}
       <motion.div
@@ -142,8 +142,8 @@ export function Hero() {
               LinkedIn
             </motion.a>
             <motion.a
-              href="/CV.pdf"
-              download="Facundo_Tamburro_CV.pdf"
+              href="/CV%20-%20Tamburro,%20Facundo%20(24).%20ES..pdf"
+              download="CV.pdf"
               className="px-5 py-2.5 bg-emerald-50 text-emerald-700 rounded-lg hover:shadow-lg border border-emerald-300 hover:border-emerald-500 hover:bg-emerald-100 transition-all flex items-center gap-1.5 text-sm"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -159,7 +159,7 @@ export function Hero() {
           initial={{ opacity: 0, x: 50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, delay: 0.3 }}
-          className="relative"
+          className="relative w-full max-w-sm mx-auto"
         >
           <motion.div
             className="relative z-10"
@@ -194,7 +194,7 @@ export function Hero() {
       </div>
 
       <motion.div
-        className="absolute bottom-10 left-1/2 transform -translate-x-1/2"
+        className="absolute bottom-6 left-1/2 transform -translate-x-1/2 hidden sm:block"
         animate={{ y: [0, 10, 0] }}
         transition={{ duration: 1.5, repeat: Infinity }}
       >
