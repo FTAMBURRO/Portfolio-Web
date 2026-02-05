@@ -142,7 +142,7 @@ export function Hero() {
               LinkedIn
             </motion.a>
             <motion.a
-              href="/CV.pdf"
+              href="/CV%20-%20TAMBURRO,%20Facundo%20(24).pdf"
               download="CV - TAMBURRO, Facundo (24).pdf"
               className="px-5 py-2.5 bg-emerald-50 text-emerald-700 rounded-lg hover:shadow-lg border border-emerald-300 hover:border-emerald-500 hover:bg-emerald-100 transition-all flex items-center gap-1.5 text-sm"
               whileHover={{ scale: 1.05 }}
