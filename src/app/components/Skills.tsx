@@ -1,4 +1,4 @@
-import { Code2, Database, Wrench, Globe, TestTube, Server, MonitorPlay } from "lucide-react";
+import { Code2, Database, Wrench, Globe, TestTube, Server, MonitorPlay, Palette } from "lucide-react";
 import { motion } from "motion/react";
 
 export function Skills() {
@@ -46,6 +46,7 @@ export function Skills() {
     { name: "Git", color: "from-orange-500 via-red-500 to-pink-500" },
     { name: "GitHub", color: "from-gray-700 via-gray-800 to-gray-900" },
     { name: "GitLab", color: "from-orange-600 via-red-600 to-pink-600" },
+    { name: "Vercel", color: "from-gray-800 via-gray-900 to-black" },
   ];
 
   const tools = [
@@ -57,6 +58,17 @@ export function Skills() {
 
   const cms = [
     { name: "WordPress", color: "from-blue-600 via-indigo-600 to-purple-700" },
+  ];
+
+  const creativeAi = [
+    { name: "Figma", color: "from-pink-500 via-fuchsia-500 to-purple-600" },
+    { name: "Photoshop", color: "from-blue-500 via-indigo-500 to-purple-600" },
+    { name: "Canva", color: "from-cyan-500 via-teal-500 to-emerald-600" },
+    { name: "ChatGPT", color: "from-emerald-600 via-teal-600 to-cyan-600" },
+    { name: "Claude", color: "from-orange-500 via-amber-500 to-yellow-500" },
+    { name: "Gemini", color: "from-blue-500 via-cyan-500 to-emerald-500" },
+    { name: "GitHub Copilot", color: "from-gray-700 via-gray-800 to-gray-900" },
+    { name: "Cursor IDE", color: "from-purple-600 via-indigo-600 to-blue-700" },
   ];
 
   const environments = [
@@ -293,6 +305,37 @@ export function Skills() {
             </div>
             <div className="flex flex-wrap gap-2">
               {cms.map((tech, index) => (
+                <motion.span
+                  key={tech.name}
+                  initial={{ opacity: 0, scale: 0.5 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.2 + index * 0.03 }}
+                  whileHover={{ scale: 1.05 }}
+                  className={`px-3 py-1.5 bg-gradient-to-r ${tech.color} text-white rounded-lg shadow-lg text-sm font-semibold cursor-pointer`}
+                >
+                  {tech.name}
+                </motion.span>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* Diseño, Productividad & IA */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.42 }}
+            className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20 hover:border-fuchsia-400/50 transition-all"
+          >
+            <div className="flex items-center gap-3 mb-4">
+              <div className="p-2 bg-gradient-to-br from-fuchsia-500 to-purple-600 rounded-xl">
+                <Palette size={20} className="text-white" />
+              </div>
+              <h3 className="text-xl text-white font-bold">Diseño, Productividad & IA</h3>
+            </div>
+            <div className="flex flex-wrap gap-2">
+              {creativeAi.map((tech, index) => (
                 <motion.span
                   key={tech.name}
                   initial={{ opacity: 0, scale: 0.5 }}
