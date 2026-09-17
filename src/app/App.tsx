@@ -1,22 +1,28 @@
 import { Header } from "@/app/components/Header";
 import { Hero } from "@/app/components/Hero";
-import { About } from "@/app/components/About";
-import { Education } from "@/app/components/Education";
-import { Skills } from "@/app/components/Skills";
+import { Services } from "@/app/components/Services";
 import { Projects } from "@/app/components/Projects";
+import { Experience } from "@/app/components/Experience";
+import { Education } from "@/app/components/Education";
+import { Process } from "@/app/components/Process";
+import { Skills } from "@/app/components/Skills";
+import { About } from "@/app/components/About";
 import { Contact } from "@/app/components/Contact";
 import { Footer } from "@/app/components/Footer";
 
 export default function App() {
   return (
-    <div className="min-h-screen">
+    <div className="site-shell">
       <Header />
       <main>
         <Hero />
-        <About />
-        <Education />
-        <Skills />
+        <Services />
         <Projects />
+        <Experience />
+        <Education />
+        <Process />
+        <Skills />
+        <About />
         <Contact />
       </main>
       <Footer />

@@ -1,161 +1,127 @@
-import { Github, ExternalLink, Star } from "lucide-react";
+import { ArrowUpRight, Github, Globe2 } from "lucide-react";
 import { motion } from "motion/react";
 
 interface Project {
+  category: string;
   title: string;
   description: string;
+  outcome: string;
   technologies: string[];
-  github?: string;
+  github: string;
   demo?: string;
-  gradient: string;
+  visual: string;
+}
+
+const projects: Project[] = [
+  {
+    category: "Microservicio implementado · Municipio de Coronel Suárez",
+    title: "Rendimiento académico",
+    description: "Módulo independiente del sistema CREUS para centralizar evidencias y evaluaciones de estudiantes, instalado en el Municipio de Coronel Suárez.",
+    outcome: "Arquitectura de dominio, API REST, permisos por rol y una implementación en un contexto institucional real.",
+    technologies: ["Flask", "PostgreSQL", "Redis", "Docker"],
+    github: "https://github.com/FTAMBURRO/creus-rendimiento",
+    visual: "project-visual-api",
+  },
+  {
+    category: "Web comercial · 2026",
+    title: "IMAG AGRO",
+    description: "Web comercial y editorial para una empresa argentina de soluciones agropecuarias.",
+    outcome: "Servicios organizados para iniciar consultas con contexto.",
+    technologies: ["React", "TypeScript", "Vite", "WhatsApp"],
+    github: "https://github.com/FTAMBURRO/imag-agro-web",
+    demo: "https://imag-agro-web.vercel.app",
+    visual: "project-visual-agro",
+  },
+  {
+    category: "E-commerce · 2026",
+    title: "Integrale VG",
+    description: "Sitio comercial y catálogo para una panadería artesanal de Gualeguaychú.",
+    outcome: "Catálogo de productos y pedidos conectados con WhatsApp.",
+    technologies: ["React", "TypeScript", "Tailwind", "Vercel"],
+    github: "https://github.com/FTAMBURRO/integrale-vg",
+    demo: "https://integrale-vg.vercel.app",
+    visual: "project-visual-bakery",
+  },
+  {
+    category: "Web industrial · 2026",
+    title: "TS Sopletes",
+    description: "Sitio institucional para un fabricante argentino de equipos de corte y regulación.",
+    outcome: "Catálogo, información técnica y caminos claros hacia la cotización.",
+    technologies: ["Next.js", "TypeScript", "Tailwind", "Motion"],
+    github: "https://github.com/FTAMBURRO/ts-sopletes",
+    demo: "https://ts-sopletes.vercel.app",
+    visual: "project-visual-industrial",
+  },
+];
+
+function ProjectPreview({ project }: { project: Project }) {
+  return (
+    <div className={`project-preview ${project.visual}`} aria-hidden="true">
+      <div className="preview-browser">
+        <span /><span /><span />
+        <small>facundo.dev / {project.title.toLowerCase().replaceAll(" ", "-")}</small>
+      </div>
+      <div className="preview-body">
+        <div className="preview-kicker">{project.category.split(" · ")[0]}</div>
+        <div className="preview-title">{project.title}</div>
+        <div className="preview-lines"><i /><i /><i /></div>
+        <div className="preview-button">explorar <ArrowUpRight size={12} /></div>
+      </div>
+    </div>
+  );
 }
 
 export function Projects() {
-  const projects: Project[] = [
-    {
-      title: "Sistema de Rendimiento Académico",
-      description:
-        "Microservicio desarrollado para un municipio que gestiona el rendimiento académico de estudiantes. Incluye módulos de registro, evaluación y generación de reportes estadísticos.",
-      technologies: ["Python", "Flask", "PostgreSQL", "REST API"],
-      github: "https://github.com/FTAMBURRO/creus-rendimiento",
-      gradient: "from-emerald-500 via-teal-500 to-cyan-500",
-    },
-    {
-      title: "Carrito de Compras Java",
-      description:
-        "Aplicación cliente-servidor desarrollada en Java que implementa un sistema de carrito de compras con gestión de inventario, autenticación de usuarios y procesamiento de órdenes.",
-      technologies: ["Java", "Swing", "JDBC", "MySQL"],
-      github: "https://github.com/FTAMBURRO/TP-TecnologiaJava-SistemaDeCompras",
-      gradient: "from-orange-500 via-amber-500 to-yellow-500",
-    },
-    {
-      title: "IntegraLe VG - Sitio Web",
-      description:
-        "Sitio web corporativo en producción desarrollado con WordPress. Incluye gestión de contenido personalizado, formularios de contacto y optimización SEO.",
-      technologies: ["WordPress", "PHP", "MySQL", "CSS"],
-      demo: "https://integralevg.com.ar/",
-      gradient: "from-purple-500 via-fuchsia-500 to-pink-500",
-    },
-  ];
-
   return (
-    <section id="projects" className="py-20 bg-gradient-to-br from-white via-orange-50/50 to-yellow-50/50 relative overflow-hidden">
-      {/* Background decoration */}
-      <div className="absolute top-0 left-0 w-full h-full opacity-20">
-        <div className="absolute top-40 left-40 w-60 h-60 bg-emerald-300 rounded-full filter blur-3xl"></div>
-        <div className="absolute bottom-40 right-40 w-60 h-60 bg-orange-300 rounded-full filter blur-3xl"></div>
-      </div>
-
-      <div className="max-w-6xl mx-auto px-6 relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-12"
-        >
-          <h2 className="text-5xl text-gray-900 mb-4 font-bold">
-            Proyectos
-          </h2>
-          <p className="text-gray-600 text-lg">
-            Algunos de mis trabajos más destacados
+    <section id="projects" className="section section-ink">
+      <div className="container-width">
+        <div className="section-heading section-heading-projects">
+          <div>
+            <p className="eyebrow eyebrow-light">Trabajo implementado y productos recientes</p>
+            <h2>Código que llega al mundo real.</h2>
+          </div>
+          <p>
+            Desde un microservicio instalado en un municipio hasta productos web para negocios,
+            cada proyecto muestra una parte distinta de mi recorrido Full Stack.
           </p>
-        </motion.div>
+        </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="projects-grid">
           {projects.map((project, index) => (
-            <motion.div
+            <motion.article
               key={project.title}
-              initial={{ opacity: 0, y: 50 }}
+              initial={{ opacity: 0, y: 22 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
-              whileHover={{ y: -10 }}
-              className="bg-white rounded-2xl border border-gray-200 shadow-lg hover:shadow-2xl transition-all overflow-hidden group"
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ delay: index * 0.07 }}
+              className={`project-card ${index === 0 ? "project-card-featured" : ""}`}
             >
-              {/* Gradient Header */}
-              <div className={`h-2 bg-gradient-to-r ${project.gradient}`}></div>
-              
-              <div className="p-6 flex flex-col h-full">
-                <div className="flex items-start justify-between mb-3">
-                  <h3 className="text-2xl text-gray-900 font-bold">{project.title}</h3>
-                  <motion.div
-                    whileHover={{ rotate: 360 }}
-                    transition={{ duration: 0.6 }}
-                  >
-                    <Star className="text-yellow-500 fill-yellow-500" size={20} />
-                  </motion.div>
+              <ProjectPreview project={project} />
+              <div className="project-card-content">
+                <div className="project-card-heading">
+                  <p className="project-category">{project.category}</p>
+                  <h3>{project.title}</h3>
                 </div>
-
-                <p className="text-gray-600 mb-4 leading-relaxed flex-grow">
-                  {project.description}
-                </p>
-
-                <div className="flex flex-wrap gap-2 mb-6">
-                  {project.technologies.map((tech) => (
-                    <motion.span
-                      key={tech}
-                      whileHover={{ scale: 1.1 }}
-                      className="px-3 py-1 bg-gradient-to-r from-gray-100 to-gray-200 text-gray-700 rounded-lg text-sm font-medium"
-                    >
-                      {tech}
-                    </motion.span>
-                  ))}
+                <p className="project-description">{project.description}</p>
+                <p className="project-outcome"><strong>Enfoque:</strong> {project.outcome}</p>
+                <div className="project-tags">
+                  {project.technologies.map((technology) => <span key={technology}>{technology}</span>)}
                 </div>
-
-                <div className="flex gap-3">
-                  {project.github && (
-                    <motion.a
-                      href={project.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={`flex items-center gap-2 px-4 py-2 bg-gradient-to-r ${project.gradient} text-white rounded-lg shadow-lg flex-1 justify-center`}
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                    >
-                      <Github size={18} />
-                      GitHub
-                    </motion.a>
-                  )}
-                  {project.demo && (
-                    <motion.a
-                      href={project.demo}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={`flex items-center gap-2 px-4 py-2 bg-gradient-to-r ${project.gradient} text-white rounded-lg shadow-lg flex-1 justify-center`}
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                    >
-                      <ExternalLink size={18} />
-                      Ver Sitio
-                    </motion.a>
-                  )}
+                <div className="project-links">
+                  {project.demo && <a href={project.demo} target="_blank" rel="noopener noreferrer"><Globe2 size={15} /> Ver sitio</a>}
+                  <a href={project.github} target="_blank" rel="noopener noreferrer"><Github size={15} /> Código <ArrowUpRight size={13} /></a>
                 </div>
               </div>
-            </motion.div>
+            </motion.article>
           ))}
         </div>
 
-        {/* CTA to GitHub */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.5 }}
-          className="text-center mt-12"
-        >
-          <p className="text-gray-600 mb-4">¿Querés ver más proyectos?</p>
-          <motion.a
-            href="https://github.com/FTAMBURRO?tab=repositories"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-8 py-3 bg-gray-900 text-white rounded-xl hover:shadow-lg transition-all"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <Github size={20} />
-            Ver todos en GitHub
-          </motion.a>
-        </motion.div>
+        <div className="projects-footer">
+          <span>Más código y experimentos en</span>
+          <a className="text-link text-link-light" href="https://github.com/FTAMBURRO?tab=repositories" target="_blank" rel="noopener noreferrer">
+            GitHub <ArrowUpRight size={17} />
+          </a>
+        </div>
       </div>
     </section>
   );
