@@ -68,8 +68,8 @@ export function Hero() {
           </div>
 
           <h1>
-            {en ? "Before I write code, I want to understand " : "Antes de escribir código, quiero entender "}
-            <em>{en ? "what you need." : "qué necesitás."}</em>
+            {en ? "Between your idea and the solution, there's a bridge. " : "Entre tu idea y la solución hay un puente. "}
+            <em>{en ? "I build it." : "Yo lo construyo."}</em>
           </h1>
 
           <p className="hero-lead">
