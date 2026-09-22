@@ -43,7 +43,7 @@ export function Hero() {
           </div>
 
           <h1>
-            Del backend a la interfaz. Del problema al <em>producto.</em>
+            Ese «¿y si…?» que te da vueltas. <em>Hagámoslo posible.</em>
           </h1>
 
           <p className="hero-lead">
