@@ -1,17 +1,19 @@
 import { ArrowUpRight, Menu, X } from "lucide-react";
 import { useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
-
-const links = [
-  { href: "#services", label: "Servicios" },
-  { href: "#projects", label: "Proyectos" },
-  { href: "#experience", label: "Experiencia" },
-  { href: "#education", label: "Formación" },
-  { href: "#about", label: "Sobre mí" },
-];
+import { useLanguage } from "@/app/LanguageContext";
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { language, setLanguage } = useLanguage();
+  const en = language === "en";
+  const links = [
+    { href: "#services", label: en ? "Services" : "Servicios" },
+    { href: "#projects", label: en ? "Projects" : "Proyectos" },
+    { href: "#experience", label: en ? "Experience" : "Experiencia" },
+    { href: "#education", label: en ? "Education" : "Formación" },
+    { href: "#about", label: en ? "About me" : "Sobre mí" },
+  ];
 
   return (
     <motion.header
@@ -20,7 +22,7 @@ export function Header() {
       transition={{ duration: 0.5, ease: "easeOut" }}
       className="site-header"
     >
-      <nav className="container-width nav-shell" aria-label="Navegación principal">
+      <nav className="container-width nav-shell" aria-label={en ? "Main navigation" : "Navegación principal"}>
         <a className="brand" href="#home" onClick={() => setMobileMenuOpen(false)}>
           <span className="brand-mark" aria-hidden="true">FT</span>
           <span className="brand-copy">
@@ -37,14 +39,20 @@ export function Header() {
           ))}
         </div>
 
-        <a className="header-cta" href="#contact">
-          Hablemos <ArrowUpRight size={16} />
-        </a>
+        <div className="header-actions">
+          <div className="language-switch" role="group" aria-label={en ? "Choose language" : "Elegir idioma"}>
+            <button type="button" lang="es" aria-pressed={!en} onClick={() => setLanguage("es")}>ES</button>
+            <button type="button" lang="en" aria-pressed={en} onClick={() => setLanguage("en")}>EN</button>
+          </div>
+          <a className="header-cta" href="#contact">
+            {en ? "Let's talk" : "Hablemos"} <ArrowUpRight size={16} />
+          </a>
+        </div>
 
         <button
           className="mobile-menu-trigger"
           type="button"
-          aria-label={mobileMenuOpen ? "Cerrar menú" : "Abrir menú"}
+          aria-label={mobileMenuOpen ? (en ? "Close menu" : "Cerrar menú") : (en ? "Open menu" : "Abrir menú")}
           aria-expanded={mobileMenuOpen}
           onClick={() => setMobileMenuOpen((open) => !open)}
         >
@@ -67,7 +75,7 @@ export function Header() {
                 </a>
               ))}
               <a className="mobile-nav-cta" href="#contact" onClick={() => setMobileMenuOpen(false)}>
-                Hablemos de tu proyecto <ArrowUpRight size={16} />
+                {en ? "Let's talk about your project" : "Hablemos de tu proyecto"} <ArrowUpRight size={16} />
               </a>
             </div>
           </motion.div>

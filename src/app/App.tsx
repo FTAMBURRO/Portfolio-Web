@@ -9,10 +9,11 @@ import { Skills } from "@/app/components/Skills";
 import { About } from "@/app/components/About";
 import { Contact } from "@/app/components/Contact";
 import { Footer } from "@/app/components/Footer";
+import { LanguageProvider } from "@/app/LanguageContext";
 
 export default function App() {
   return (
-    <div className="site-shell">
+    <LanguageProvider><div className="site-shell">
       <Header />
       <main>
         <Hero />
@@ -26,6 +27,6 @@ export default function App() {
         <Contact />
       </main>
       <Footer />
-    </div>
+    </div></LanguageProvider>
   );
 }

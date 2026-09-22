@@ -1,5 +1,6 @@
 import { ArrowUpRight, BrainCircuit, Blocks, Database, LucideIcon } from "lucide-react";
 import { motion } from "motion/react";
+import { useLanguage } from "@/app/LanguageContext";
 
 interface Service {
   number: string;
@@ -9,7 +10,7 @@ interface Service {
   icon: LucideIcon;
 }
 
-const services: Service[] = [
+const servicesEs: Service[] = [
   {
     number: "01",
     title: "Productos digitales",
@@ -33,18 +34,46 @@ const services: Service[] = [
   },
 ];
 
+const servicesEn: Service[] = [
+  {
+    number: "01",
+    title: "Digital products",
+    description: "Interfaces, websites, and digital experiences that turn an idea into something clear, useful, and ready to grow.",
+    bullets: ["Responsive frontend", "React and TypeScript", "Purposeful experiences"],
+    icon: Blocks,
+  },
+  {
+    number: "02",
+    title: "Backend, APIs & data",
+    description: "Your business logic and information, organized into reliable, scalable, well-documented services.",
+    bullets: ["REST APIs", "Data modeling", "Authentication and roles"],
+    icon: Database,
+  },
+  {
+    number: "03",
+    title: "Applied AI & automation",
+    description: "I explore ways to use AI and automation to save time, uncover opportunities, and work better.",
+    bullets: ["Intelligent workflows", "API integrations", "Internal tools"],
+    icon: BrainCircuit,
+  },
+];
+
 export function Services() {
+  const { language } = useLanguage();
+  const en = language === "en";
+  const services = en ? servicesEn : servicesEs;
   return (
     <section id="services" className="section section-paper">
       <div className="container-width">
         <div className="section-heading section-heading-split">
           <div>
-            <p className="eyebrow">Servicios</p>
-            <h2>Una mirada completa para resolver problemas reales.</h2>
+            <p className="eyebrow">{en ? "Services" : "Servicios"}</p>
+            <h2>{en ? "A full-picture approach to real problems." : "Una mirada completa para resolver problemas reales."}</h2>
           </div>
           <p>
-            No me encierro en una sola capa ni en una sola herramienta. Entiendo el problema,
-            propongo el formato correcto y construyo con una mirada que conecta producto, código y negocio.
+            {en
+              ? "I don't limit myself to one layer or one tool. I understand the problem, choose the right approach, and connect product, code, and business."
+              : "No me encierro en una sola capa ni en una sola herramienta. Entiendo el problema, propongo el formato correcto y construyo con una mirada que conecta producto, código y negocio."}
           </p>
         </div>
 
@@ -67,7 +96,7 @@ export function Services() {
               <ul>
                 {service.bullets.map((bullet) => <li key={bullet}>{bullet}</li>)}
               </ul>
-              <a href="#contact" className="card-link">Consultar <ArrowUpRight size={16} /></a>
+              <a href="#contact" className="card-link">{en ? "Get in touch" : "Consultar"} <ArrowUpRight size={16} /></a>
             </motion.article>
           ))}
         </div>

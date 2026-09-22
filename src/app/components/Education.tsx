@@ -1,7 +1,8 @@
 import { Award, BookOpen, GraduationCap, Languages } from "lucide-react";
 import { motion } from "motion/react";
+import { useLanguage } from "@/app/LanguageContext";
 
-const education = [
+const educationEs = [
   {
     period: "2022—2025",
     title: "Tecnicatura en Programación de Computadores",
@@ -25,18 +26,46 @@ const education = [
   },
 ];
 
+const educationEn = [
+  {
+    period: "2022—2025",
+    title: "University Technical Degree in Computer Programming",
+    institution: "Universidad Nacional de Lomas de Zamora",
+    detail: "A strong foundation in programming, databases, architecture, and systems development.",
+    icon: GraduationCap,
+  },
+  {
+    period: "Ongoing learning",
+    title: "AI, data & digital tools",
+    institution: "Santander Academy · Google Cloud Skills Boost · Coderhouse",
+    detail: "Training in artificial intelligence, BigQuery ML, and WordPress, alongside continuous hands-on learning.",
+    icon: Award,
+  },
+  {
+    period: "2010—2018",
+    title: "English",
+    institution: "Instituto My English School",
+    detail: "Long-term study that supports continued learning and work with technical documentation.",
+    icon: Languages,
+  },
+];
+
 export function Education() {
+  const { language } = useLanguage();
+  const en = language === "en";
+  const education = en ? educationEn : educationEs;
   return (
     <section id="education" className="section section-mist education-section">
       <div className="container-width">
         <div className="section-heading section-heading-split">
           <div>
-            <p className="eyebrow">Formación</p>
-            <h2>Una base técnica para seguir creciendo sin ponerme techo.</h2>
+            <p className="eyebrow">{en ? "Education" : "Formación"}</p>
+            <h2>{en ? "A technical foundation, with room to keep growing." : "Una base técnica para seguir creciendo sin ponerme techo."}</h2>
           </div>
           <p>
-            La formación me dio fundamentos. La práctica, la curiosidad y la capacidad de adaptarme
-            me permiten llevarlos a proyectos cada vez más ambiciosos.
+            {en
+              ? "Education gave me the fundamentals. Practice, curiosity, and adaptability help me apply them to increasingly ambitious projects."
+              : "La formación me dio fundamentos. La práctica, la curiosidad y la capacidad de adaptarme me permiten llevarlos a proyectos cada vez más ambiciosos."}
           </p>
         </div>
 
@@ -63,7 +92,7 @@ export function Education() {
 
         <div className="education-note">
           <BookOpen size={18} />
-          <span>Lo que sé hoy es una base; lo que estoy construyendo recién empieza.</span>
+          <span>{en ? "What I know today is a foundation; I'm just getting started." : "Lo que sé hoy es una base; lo que estoy construyendo recién empieza."}</span>
         </div>
       </div>
     </section>
