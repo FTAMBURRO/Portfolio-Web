@@ -46,45 +46,37 @@ export function Hero() {
           initial={{ opacity: 0, scale: 0.96, x: 18 }}
           animate={{ opacity: 1, scale: 1, x: 0 }}
           transition={{ duration: 0.75, delay: 0.15, ease: "easeOut" }}
-          className="hero-visual"
+          className="hero-proof"
         >
-          <div className="hero-visual-backdrop" aria-hidden="true" />
-          <div className="hero-orbit-label" aria-hidden="true">CODE · DATA · AI ·</div>
-          <div className="photo-frame">
-            <img src="/portfolio.jpeg" alt="Facundo Tamburro trabajando en su notebook" />
+          <div className="hero-proof-top">
+            <span className="hero-proof-signal" aria-hidden="true" />
+            <span>EXPERIENCIA REAL</span>
+            <span className="hero-proof-count">01 / 02</span>
           </div>
-
-          <div className="hero-note hero-note-top">
-            <span className="note-label">Enfoque</span>
-            <strong>Soluciones con criterio</strong>
+          <div className="hero-proof-intro">
+            <span>DEL CÓDIGO A LA IMPLEMENTACIÓN</span>
+            <strong>Trabajo que salió al mundo.</strong>
           </div>
-          <motion.div
-            className="hero-system-card"
-            animate={{ y: [0, -6, 0] }}
-            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-            aria-label="Resumen de enfoque técnico"
-          >
-            <div className="system-card-top">
-              <span className="system-pulse" />
-              <span>FT / FULL STACK SYSTEM</span>
-              <span className="system-index">01—04</span>
+          <div className="hero-proof-entry">
+            <span>01 / SISTEMAS</span>
+            <strong>Municipio de Coronel Suárez</strong>
+            <p>Microservicio implementado en un entorno institucional.</p>
+          </div>
+          <div className="hero-proof-entry">
+            <span>02 / DATOS</span>
+            <strong>Universidad de Buenos Aires</strong>
+            <p>Un año de desarrollo y trabajo con bases de datos.</p>
+          </div>
+          <div className="hero-proof-bottom">
+            <a href="#experience">Ver experiencia <ArrowUpRight size={16} /></a>
+            <div className="hero-proof-socials" aria-label="Redes sociales">
+              <a href="https://github.com/FTAMBURRO" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                <Github size={17} />
+              </a>
+              <a href="https://www.linkedin.com/in/facundo-tamburro" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                <Linkedin size={17} />
+              </a>
             </div>
-            <div className="system-card-title">Ideas <em>→</em> posibilidades</div>
-            <div className="system-card-track"><span /></div>
-            <div className="system-card-footer">
-              <span><small>CODE</small><strong>READY</strong></span>
-              <span><small>DATA</small><strong>READY</strong></span>
-              <span><small>AI</small><strong>EXPLORING</strong></span>
-            </div>
-          </motion.div>
-
-          <div className="hero-socials" aria-label="Redes sociales">
-            <a href="https://github.com/FTAMBURRO" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-              <Github size={17} />
-            </a>
-            <a href="https://www.linkedin.com/in/facundo-tamburro" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-              <Linkedin size={17} />
-            </a>
           </div>
         </motion.div>
       </div>

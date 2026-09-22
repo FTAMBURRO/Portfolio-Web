@@ -1,4 +1,4 @@
-import { ArrowUpRight, Check, Compass, HeartHandshake, Lightbulb, ShieldCheck } from "lucide-react";
+import { ArrowUpRight, Check, Compass, HeartHandshake, Lightbulb } from "lucide-react";
 import { motion } from "motion/react";
 
 const values = [
@@ -17,6 +17,13 @@ export function About() {
           viewport={{ once: true, margin: "-60px" }}
           className="about-copy"
         >
+          <div className="about-identity">
+            <img src="/portfolio.jpeg" alt="Facundo Tamburro" loading="lazy" />
+            <div>
+              <strong>Facundo Tamburro</strong>
+              <span>Full Stack Developer · Buenos Aires</span>
+            </div>
+          </div>
           <p className="eyebrow">Sobre mí</p>
           <h2>Full Stack por naturaleza. Curioso por necesidad.</h2>
           <p>
