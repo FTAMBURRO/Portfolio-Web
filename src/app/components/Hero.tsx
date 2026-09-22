@@ -1,7 +1,32 @@
 import { ArrowDownRight, ArrowUpRight, BrainCircuit, Github, Linkedin, MapPin } from "lucide-react";
-import { motion } from "motion/react";
+import { AnimatePresence, motion } from "motion/react";
+import { useState } from "react";
+
+const challenges = [
+  {
+    label: "Una idea",
+    title: "Que deje de ser solo una idea.",
+    description: "Definimos qué vale la pena construir, lanzamos una primera versión y aprendemos de su uso.",
+    path: ["Objetivo", "Producto", "Evolución"],
+  },
+  {
+    label: "Datos dispersos",
+    title: "Que los datos cuenten algo.",
+    description: "Conectamos fuentes, ordenamos la información y la volvemos útil para tomar decisiones.",
+    path: ["Fuentes", "Modelo", "Decisiones"],
+  },
+  {
+    label: "Tareas repetidas",
+    title: "Que el sistema haga su parte.",
+    description: "Detectamos pasos manuales y diseñamos una solución que le devuelva tiempo al equipo.",
+    path: ["Proceso", "Automatización", "Tiempo"],
+  },
+];
 
 export function Hero() {
+  const [activeChallenge, setActiveChallenge] = useState(0);
+  const selectedChallenge = challenges[activeChallenge];
+
   return (
     <section id="home" className="hero-section">
       <div className="hero-grid-lines" aria-hidden="true" />
@@ -46,30 +71,55 @@ export function Hero() {
           initial={{ opacity: 0, scale: 0.96, x: 18 }}
           animate={{ opacity: 1, scale: 1, x: 0 }}
           transition={{ duration: 0.75, delay: 0.15, ease: "easeOut" }}
-          className="hero-proof"
+          className="hero-console"
         >
-          <div className="hero-proof-top">
-            <span className="hero-proof-signal" aria-hidden="true" />
-            <span>EXPERIENCIA REAL</span>
-            <span className="hero-proof-count">01 / 02</span>
+          <div className="hero-console-top">
+            <span className="hero-console-signal" aria-hidden="true" />
+            <span>UN PUNTO DE PARTIDA</span>
+            <span className="hero-console-count">0{activeChallenge + 1} / 03</span>
           </div>
-          <div className="hero-proof-intro">
-            <span>DEL CÓDIGO A LA IMPLEMENTACIÓN</span>
-            <strong>Trabajo que salió al mundo.</strong>
+          <div className="hero-console-intro">
+            <span>HAGAMOS EL EJERCICIO</span>
+            <h2>¿Qué querés destrabar?</h2>
           </div>
-          <div className="hero-proof-entry">
-            <span>01 / SISTEMAS</span>
-            <strong>Municipio de Coronel Suárez</strong>
-            <p>Microservicio implementado en un entorno institucional.</p>
+          <div className="hero-console-options" role="group" aria-label="Elegí un desafío">
+            {challenges.map((challenge, index) => (
+              <button
+                key={challenge.label}
+                className={`hero-console-option${activeChallenge === index ? " is-active" : ""}`}
+                type="button"
+                aria-pressed={activeChallenge === index}
+                onClick={() => setActiveChallenge(index)}
+              >
+                <span>0{index + 1}</span>
+                <strong>{challenge.label}</strong>
+                <ArrowUpRight size={17} aria-hidden="true" />
+              </button>
+            ))}
           </div>
-          <div className="hero-proof-entry">
-            <span>02 / DATOS</span>
-            <strong>Universidad de Buenos Aires</strong>
-            <p>Un año de desarrollo y trabajo con bases de datos.</p>
+          <div className="hero-console-result" aria-live="polite">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeChallenge}
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -8 }}
+                transition={{ duration: 0.18 }}
+              >
+                <span className="hero-console-result-label">UN POSIBLE CAMINO</span>
+                <h3>{selectedChallenge.title}</h3>
+                <p>{selectedChallenge.description}</p>
+                <div className="hero-console-path" aria-label={selectedChallenge.path.join(" a ")}>
+                  {selectedChallenge.path.map((step, index) => (
+                    <span key={step}>{step}{index < 2 && <ArrowUpRight size={13} aria-hidden="true" />}</span>
+                  ))}
+                </div>
+              </motion.div>
+            </AnimatePresence>
           </div>
-          <div className="hero-proof-bottom">
-            <a href="#experience">Ver experiencia <ArrowUpRight size={16} /></a>
-            <div className="hero-proof-socials" aria-label="Redes sociales">
+          <div className="hero-console-bottom">
+            <a href="#contact">¿Y el tuyo? Hablemos <ArrowUpRight size={16} /></a>
+            <div className="hero-console-socials" aria-label="Redes sociales">
               <a href="https://github.com/FTAMBURRO" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
                 <Github size={17} />
               </a>
