@@ -87,6 +87,7 @@ export function GlareHover({
     const root = rootRef.current;
     const glare = glareRef.current;
     if (!root || !glare) return;
+    const hoverTarget = root.closest(".project-card") ?? root;
 
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const geometry = { band: 0, reach: 0, ux: 0, uy: -1, angle: 0 };
@@ -184,7 +185,12 @@ export function GlareHover({
       wake();
     };
     const onEnter = (event: PointerEvent) => {
-      if (mode === "hover") sweep(along(event) > 0 ? -1 : 1);
+      if (mode === "hover" && event.pointerType !== "touch" && !reduced) {
+        state.presence = 1;
+        state.pos = -geometry.reach;
+        state.sweep = null;
+        sweep(1);
+      }
       if (mode === "follow") {
         if (state.presence < 0.02) {
           state.pos = Math.max(-geometry.reach, Math.min(geometry.reach, along(event)));
@@ -196,7 +202,14 @@ export function GlareHover({
     };
     const onMove = (event: PointerEvent) => { if (mode === "follow") follow(event); };
     const onLeave = (event: PointerEvent) => {
-      if (mode === "hover" && !settingsRef.current.playOnce) sweep(along(event) > 0 ? 1 : -1);
+      if (mode === "hover") {
+        cancelAnimationFrame(animationFrame);
+        animationFrame = 0;
+        state.sweep = null;
+        state.presence = 0;
+        state.pos = -geometry.reach;
+        write();
+      }
       if (mode === "follow") {
         state.presenceTarget = 0;
         wake();
@@ -204,7 +217,7 @@ export function GlareHover({
     };
     const onDown = (event: PointerEvent) => { if (mode === "click") sweep(along(event) > 0 ? -1 : 1); };
     const onFocus = (event: FocusEvent) => {
-      if (mode !== "follow" && event.target instanceof Element && event.target.matches(":focus-visible")) sweep(1);
+      if (mode !== "follow" && mode !== "hover" && event.target instanceof Element && event.target.matches(":focus-visible")) sweep(1);
     };
     const schedule = () => {
       window.clearTimeout(timer);
@@ -215,22 +228,22 @@ export function GlareHover({
       }, Math.max(0.5, settingsRef.current.interval) * 1000);
     };
 
-    root.addEventListener("pointerenter", onEnter);
+    hoverTarget.addEventListener("pointerenter", onEnter as EventListener);
     root.addEventListener("pointermove", onMove);
-    root.addEventListener("pointerleave", onLeave);
+    hoverTarget.addEventListener("pointerleave", onLeave as EventListener);
     root.addEventListener("pointerdown", onDown);
     root.addEventListener("focusin", onFocus);
     const resizeObserver = new ResizeObserver(measure);
     resizeObserver.observe(root);
     const visibilityObserver = new IntersectionObserver(([entry]) => {
       state.visible = entry.isIntersecting;
-      if (entry.isIntersecting && settingsRef.current.intro && !introRef.current) {
+      if (mode !== "hover" && entry.isIntersecting && settingsRef.current.intro && !introRef.current) {
         introRef.current = true;
         sweep(1);
       }
     }, { threshold: 0.4 });
     visibilityObserver.observe(root);
-    state.presence = mode === "follow" ? 0 : 1;
+    state.presence = mode === "follow" || mode === "hover" ? 0 : 1;
     state.presenceTarget = state.presence;
     state.pos = -10000;
     measure();
@@ -241,9 +254,9 @@ export function GlareHover({
       window.clearTimeout(timer);
       resizeObserver.disconnect();
       visibilityObserver.disconnect();
-      root.removeEventListener("pointerenter", onEnter);
+      hoverTarget.removeEventListener("pointerenter", onEnter as EventListener);
       root.removeEventListener("pointermove", onMove);
-      root.removeEventListener("pointerleave", onLeave);
+      hoverTarget.removeEventListener("pointerleave", onLeave as EventListener);
       root.removeEventListener("pointerdown", onDown);
       root.removeEventListener("focusin", onFocus);
     };
