@@ -1,6 +1,7 @@
 import { ArrowUpRight, Github, Globe2 } from "lucide-react";
 import { motion } from "motion/react";
 import { useLanguage } from "@/app/LanguageContext";
+import { GlareHover } from "@/app/components/GlareHover";
 
 interface Project {
   kind: "system" | "web";
@@ -125,11 +126,31 @@ function ProjectPreview({ project, en }: { project: Project; en: boolean }) {
         rel="noopener noreferrer"
         aria-label={`${en ? "Open" : "Abrir"} ${project.title}`}
       >
-        <img src={project.image} alt={`${en ? "Homepage of" : "Página de inicio de"} ${project.title}`} loading="lazy" />
-        <span className="project-preview-shade" aria-hidden="true" />
-        <span className="project-preview-action">
-          {en ? "View live project" : "Explorar proyecto"} <ArrowUpRight size={15} />
-        </span>
+        <GlareHover
+          width="100%"
+          height="100%"
+          borderRadius="0px"
+          mode="hover"
+          variant="streak"
+          glareColor="#ffffff"
+          glareOpacity={0.5}
+          glareSize={30}
+          softness={0.6}
+          glareAngle={-45}
+          blendMode="screen"
+          rimGlint
+          transitionDuration={650}
+          interval={3}
+          playOnce={false}
+          intro={false}
+          className="project-preview-glare"
+        >
+          <img src={project.image} alt={`${en ? "Homepage of" : "Página de inicio de"} ${project.title}`} loading="lazy" />
+          <span className="project-preview-shade" aria-hidden="true" />
+          <span className="project-preview-action">
+            {en ? "View live project" : "Explorar proyecto"} <ArrowUpRight size={15} />
+          </span>
+        </GlareHover>
       </a>
     );
   }
