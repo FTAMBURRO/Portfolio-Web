@@ -10,6 +10,7 @@ import { About } from "@/app/components/About";
 import { Contact } from "@/app/components/Contact";
 import { Footer } from "@/app/components/Footer";
 import { LanguageProvider } from "@/app/LanguageContext";
+import { Analytics } from "@vercel/analytics/react";
 
 export default function App() {
   return (
@@ -27,6 +28,7 @@ export default function App() {
         <Contact />
       </main>
       <Footer />
+      <Analytics />
     </div></LanguageProvider>
   );
 }
