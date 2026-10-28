@@ -103,6 +103,7 @@ export function GlareHover({
     let animationFrame = 0;
     let lastFrame = 0;
     let timer = 0;
+    let touchSweep = false;
 
     const bands = () => [bandRef.current, rimRef.current].filter((element): element is HTMLSpanElement => Boolean(element));
     const write = () => {
@@ -139,7 +140,13 @@ export function GlareHover({
         const progress = Math.min(1, (now - sweepState.start) / sweepState.duration);
         state.pos = sweepState.from + (sweepState.to - sweepState.from) * ease(progress);
         if (progress < 1) moving = true;
-        else state.sweep = null;
+        else {
+          state.sweep = null;
+          if (touchSweep) {
+            state.presence = 0;
+            touchSweep = false;
+          }
+        }
       } else if (mode === "follow") {
         const steps = Math.max(1, Math.ceil(delta / (1 / 120)));
         const step = delta / steps;
@@ -202,6 +209,7 @@ export function GlareHover({
     };
     const onMove = (event: PointerEvent) => { if (mode === "follow") follow(event); };
     const onLeave = (event: PointerEvent) => {
+      if (mode === "hover" && event.pointerType === "touch" && touchSweep) return;
       if (mode === "hover") {
         cancelAnimationFrame(animationFrame);
         animationFrame = 0;
@@ -215,7 +223,16 @@ export function GlareHover({
         wake();
       }
     };
-    const onDown = (event: PointerEvent) => { if (mode === "click") sweep(along(event) > 0 ? -1 : 1); };
+    const onDown = (event: PointerEvent) => {
+      if (mode === "hover" && event.pointerType !== "mouse" && !reduced) {
+        touchSweep = true;
+        state.presence = 1;
+        state.pos = -geometry.reach;
+        state.sweep = null;
+        sweep(1);
+      }
+      if (mode === "click") sweep(along(event) > 0 ? -1 : 1);
+    };
     const onFocus = (event: FocusEvent) => {
       if (mode !== "follow" && mode !== "hover" && event.target instanceof Element && event.target.matches(":focus-visible")) sweep(1);
     };
@@ -231,7 +248,7 @@ export function GlareHover({
     hoverTarget.addEventListener("pointerenter", onEnter as EventListener);
     root.addEventListener("pointermove", onMove);
     hoverTarget.addEventListener("pointerleave", onLeave as EventListener);
-    root.addEventListener("pointerdown", onDown);
+    hoverTarget.addEventListener("pointerdown", onDown as EventListener, { passive: true });
     root.addEventListener("focusin", onFocus);
     const resizeObserver = new ResizeObserver(measure);
     resizeObserver.observe(root);
@@ -257,7 +274,7 @@ export function GlareHover({
       hoverTarget.removeEventListener("pointerenter", onEnter as EventListener);
       root.removeEventListener("pointermove", onMove);
       hoverTarget.removeEventListener("pointerleave", onLeave as EventListener);
-      root.removeEventListener("pointerdown", onDown);
+      hoverTarget.removeEventListener("pointerdown", onDown as EventListener);
       root.removeEventListener("focusin", onFocus);
     };
   }, [mode]);

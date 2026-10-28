@@ -166,7 +166,8 @@ export function WebThreads({
 
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const coarsePointer = window.matchMedia("(pointer: coarse)").matches;
-    const allowPointer = mouseInteraction && !coarsePointer && !reduceMotion;
+    const allowPointer = mouseInteraction && !reduceMotion;
+    const pointerTarget = container.closest(".hero-section") ?? container;
     const renderer = new Renderer({
       webgl: 2,
       alpha: true,
@@ -262,8 +263,11 @@ export function WebThreads({
     };
 
     if (allowPointer) {
-      container.addEventListener("pointermove", onPointerMove);
-      container.addEventListener("pointerleave", onPointerLeave);
+      pointerTarget.addEventListener("pointerdown", onPointerMove as EventListener, { passive: true });
+      pointerTarget.addEventListener("pointermove", onPointerMove as EventListener, { passive: true });
+      pointerTarget.addEventListener("pointerup", onPointerLeave);
+      pointerTarget.addEventListener("pointercancel", onPointerLeave);
+      pointerTarget.addEventListener("pointerleave", onPointerLeave);
     }
     const intersectionObserver = new IntersectionObserver(([entry]) => {
       onScreen = entry.isIntersecting;
@@ -282,8 +286,11 @@ export function WebThreads({
       resizeObserver.disconnect();
       intersectionObserver.disconnect();
       document.removeEventListener("visibilitychange", onVisibilityChange);
-      container.removeEventListener("pointermove", onPointerMove);
-      container.removeEventListener("pointerleave", onPointerLeave);
+      pointerTarget.removeEventListener("pointerdown", onPointerMove as EventListener);
+      pointerTarget.removeEventListener("pointermove", onPointerMove as EventListener);
+      pointerTarget.removeEventListener("pointerup", onPointerLeave);
+      pointerTarget.removeEventListener("pointercancel", onPointerLeave);
+      pointerTarget.removeEventListener("pointerleave", onPointerLeave);
       canvas.remove();
       gl.getExtension("WEBGL_lose_context")?.loseContext();
     };
